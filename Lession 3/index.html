@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Custom Atrrbute</title>
+</head>
+<body>
+    <h1>HTML Custom Attrbute</h1>
+    <div id="target" ng-app="hello">
+        <section>
+            Section 1
+            <article>
+                Article 1
+            </article>
+        </section>
+    </div>
+    <script>
+        // let element = document.getElementById('target');
+        // console.log(element);
+
+        // console.log(element.getAttribute('ng-app'));
+
+        let element2 = document.querySelector("[ng-app]");
+        console.log(element2);
+        console.log(element2.getAttribute("ng-app"));
+    </script>
+</body>
+</html>
