@@ -3,11 +3,14 @@
 
     angular.module('MsgApp', [])
 
-    .controller('MsgController', MsgController);
+    .controller('MsgController', MsgController)
+    .filter('custom', LoveFilter)
+    .filter('truth', TruthFilter);
 
-    MsgController.$inject = ['$scope']; // This is protect the application from modification
+    // Declaer the filter method
+    MsgController.$inject = ['$scope', '$filter', 'customFilter', 'truthFilter']; // This is protect the application from modification
 
-    function MsgController($scope) {
+    function MsgController($scope, $filter,  customFilter) {
         $scope.name = "Victor Chukwuemeka";
         $scope.stateOfBeing = "html5";
 
@@ -15,8 +18,41 @@
             $scope.stateOfBeing = "php";
         }
 
+        $scope.cookieCost = .55;
+
+        // Usin filter method
         $scope.sayMessage = function () {
-            return "Victor like to eat snacks at night";
+            let msg = "Victor like to eat snacks at night";
+
+            msg = $filter('uppercase')(msg);
+
+            return msg;
+        }
+
+        $scope.sayLovesMessage = function () {
+            let msgs = "Victor like to eat snacks at night";
+
+            msgs = customFilter(msgs)
+
+            return msgs;
+        }
+    }
+
+    // Crating a custom filter
+    function LoveFilter() {
+        return function (input){
+            input = input || "";
+            input = input.replace("like", "love");
+            return input;
+        }
+    }
+
+    // Crating a custom filter with arguments
+    function TruthFilter () {
+        return function (input, target, replace){
+            input = input || "";
+            input = input.replace(target, replace);
+            return input;
         }
     }
 })();

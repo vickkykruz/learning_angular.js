@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="BlindingApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-ways, 1-way and 1-time Blinding</title>
+    <script src="../angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <div class="" ng-controller="BlindingController">
+        <h1>2-Ways, 1-Way And 1-Time Blinding</h1>
+        <button ng-click="showNumberOfWatchers()">Log # of Watchers</button>
+        <button ng-click="setFullName()">Set Fullname</button>
+        <div class="">
+            Fullname is {{ ::fullName }}
+        </div>
+        <button ng-click="logSurName()">Log Surname</button>
+        <button ng-click="logFirstName()">Log First Name</button>
+        <button ng-click="logLastName()">Log Last Name</button>
+        <button ng-click="logFullName()">Log Full Name</button>
+
+        <div class="">
+            <input type="text" name="" ng-model="surName" id="">
+            <input type="text" name="" ng-model="firstName" id="">
+            <input type="text" name="" ng-model="lastName" id="">
+        </div>
+    </div>
+</body>
+</html>
