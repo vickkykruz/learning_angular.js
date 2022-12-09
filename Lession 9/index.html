@@ -11,24 +11,26 @@
 <body>
     <h1>ng-repeat</h1>
     <div class="" ng-controller="ShoppingListController">
-        <!-- <h2>Shopping List</h2>
+        <h2>Shopping List</h2>
+        <!-- How to create search automatical -->
+        <input type="text" name=""ng-model="search" id="">
         <ul>
-            <li ng-repeat="x in shoppingLists1">{{ x }}</li>
-        </ul> -->
+            <li ng-repeat="x in shoppingLists1 | filter : search">{{ x }}</li>
+        </ul>
         
         <!-- <h2>Shopping List #2</h2>
         <ul>
             <li ng-repeat="item in shoppingList2">Buy {{ item.quantity }} of {{ item.name }}</li>
         </ul> -->
 
-        <h2>Shopping List #3</h2>
+        <!-- <h2>Shopping List #3</h2>
         <input type="text" name="" ng-model="shoppingList2[0].quantity" id="">
         <ul>
             <li ng-repeat="item in shoppingList2">{{ $index+1 }}. Buy {{ item.quantity }} of {{ item.name }}</li>
         </ul>
         Item Name <input type="text" name="" ng-model="itemName" id=""> <br>
         Item Qunatity <input type="text" name="" ng-model="itemQuantity" id=""> <br>
-        <button ng-click="addItem()">Add Item</button>
+        <button ng-click="addItem()">Add Item</button> -->
     </div>
 </body>
 </html>

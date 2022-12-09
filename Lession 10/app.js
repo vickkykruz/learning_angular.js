@@ -23,3 +23,19 @@ function contentValue(value){
 
 let searchedSoppingList = shoppingList1.filter(contentValue);
 console.log(searchedSoppingList);
+// ====================================
+// Javascript Formanity
+
+// Angular To filter search value
+(()=> {
+    'use strict';
+
+    angular.module('SearchApp', [])
+    .controller('SearchController', SearchController);
+
+    SearchController.$inject = ['$scope'];
+
+    function SearchController($scope) {
+        $scope.shoppingList1 = shoppingList1;
+    }
+})();
