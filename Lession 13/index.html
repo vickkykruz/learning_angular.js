@@ -5,14 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Services</title>
+    <script src="../angular.min.js"></script>
+    <script src="app.js"></script>
 </head>
 <body>
     <h1>Custom Services</h1>
-    <div class="" ng-controller="ShoppingListController as itemAdder">
+    <div class="" ng-controller="ShoppingListAddController as itemAdder">
         <input type="text" name="" ng-model="itemAdder.itemName" id="" placeholder="Item Name">
-        <input type="number" name="" ng-model="itemAdder.itemQuantity" id="" placeholder="Item Quantity">
+        <input type="text" name="" ng-model="itemAdder.itemQuantity" id="" placeholder="Item Quantity">
 
         <button ng-click="itemAdder.addItem()">Add Items To Shopping List</button>
+    </div>
+
+    <!-- Dispaly Lists -->
+    <div class="" ng-controller="ShoppingListShowController as showList">
+        <ol>
+            <li ng-repeat="item in showList.item">
+                {{ item.name }} of {{ item.itemQuantity }}
+                <button ng-click="showList.removeItem($index)"> Remove </button>
+            </li>
+        </ol>
     </div>
 </body>
 </html>
