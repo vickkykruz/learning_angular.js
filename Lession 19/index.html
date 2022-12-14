@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="DirectiveApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Directives: Dynamic HTML (Use Of Template).</title>
+    <script src="../angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <h1>Directives: Dynamic HTML (Use Of Template). </h1>
+    
+    <div class="display">
+        <!--List 1 (unlimited items)  -->
+        <div id="list1" ng-controller="ShoppingListController1 as list">
+            <h3>Shopping List #1</h3>
+            <input type="text" name="" placeholder="Name Of Item" ng-model="list.itemName" id="">
+            <input type="text" name="" placeholder="Quantity Of Item" ng-model="list.itemQuantity" id="">
+            <button ng-click="list.addItem()">Add Item</button>
+
+            <ol>
+                <list-item ng-repeat="item in list.items"></list-item>
+            </ol>
+            <div class="error">Error: {{ list.errorMessage }}</div>
+        </div>
+
+        <!-- List #2 (limited to 3 items) -->
+        <div id="list2" ng-controller="ShoppingListController2 as list">
+            <h3>Shopping List #2</h3>
+            <input type="text" name="" placeholder="Name Of Item" ng-model="list.itemName" id="">
+            <input type="text" name="" placeholder="Quantity Of Item" ng-model="list.itemQuantity" id="">
+            <button ng-click="list.addItem()">Add Item</button>
+
+            <ol>
+                <list-item ng-repeat="item in list.items"></list-item>
+            </ol>
+            <div class="error">Error: {{ list2.errorMessage }}</div>
+        </div>
+    </div>
+    
+</body>
+</html>

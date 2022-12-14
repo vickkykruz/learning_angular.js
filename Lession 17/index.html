@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ShoppingListPromiseApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List With a Promise</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+    <script src="../angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <h1>Shopping List With a Promise</h1>
+
+    <!-- PreConfigured List -->
+    <div class="" id="list" ng-controller="ShoppingListController as list">
+        <h3>Shopping List</h3>
+        <input type="text" name="" ng-model="list.itemName" placeholder="Enter Name Of Item" id="">
+        <input type="text" name="" ng-model="list.itemQuantity" placeholder="Enter Quantity" id="">
+        <!-- Action -->
+        <button ng-click="list.addItem()">Add Item</button>
+
+        <!-- Display Item -->
+        <ol>
+            <li ng-repeat="item in list.items">
+                {{ item.quantity }} Boxes of {{ item.name }}
+                <button ng-click="list.removeItem($index)">Remove Item</button>
+            </li>
+        </ol>
+        <!-- <div class="error" ng-if="list.errorMessage"> Error: {{ list.errorMessage }}</div> -->
+        <!-- <div class="error" ng-show="list.errorMessage"> Error: {{ list.errorMessage }}</div> -->
+        <!-- <div class="error" ng-hide="!list.errorMessage"> Error: {{ list.errorMessage }}</div> -->
+    </div>
+</body>
+</html>
