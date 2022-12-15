@@ -1,37 +1,30 @@
 (()=> {
     'use strict';
 
-    angular.module('DirectiveApp', [])
+    angular.module('ShoppingListComponetApp', [])
     .controller('ShoppingListController1', ShoppingListController1)
     .controller('ShoppingListController2', ShoppingListController2)
-    .controller('ShoppingListDirectiveController', ShoppingListDirectiveController) // Register the directive controller inside the module
     .factory('ShoppingListFactory', ShoppingListFactory)
     .directive('listItemDescription', ListItemDescription)
-    .directive('shoppingList', shoppingListDirective);
-
-    function shoppingListDirective() {
-        let ddo = {
-            templateUrl: 'list.html',
-            scope: {
-                items: '<',
-                title: '@' //The implementation of title
-            },
-            // controller: ShoppingListDirectiveController,
-             // Another way to do this, is to register it with module.
-             controller: 'ShoppingListDirectiveController as list',
-            // controllerAs: 'list',
-            bindToController: true
+    .component('shoppingList', {
+        templateUrl: 'list.html',
+        controller: ShoppingListComponentController,
+        bindings: {
+            items: '<',
+            myTitle: '@title',
+            onRemove: '&'
         }
+    });
 
-        return ddo;
-    }
 
-    function ShoppingListDirectiveController() {
-        let list = this;
 
-        list.cookiesList = ()=> {
-            for (let i = 0; i < list.items.length; i++) {
-                let itemName = list.items[i].name;
+    ShoppingListComponentController.$inject = ['$scope', '$element']
+    function ShoppingListComponentController($scope, $element) {
+        let $ctrl = this;
+
+        $ctrl.cookiesList = ()=> {
+            for (let i = 0; i < $ctrl.items.length; i++) {
+                let itemName = $ctrl.items[i].name;
                 
                 if((itemName.toLowerCase().indexOf("cookies") !== -1) || (itemName.toLowerCase().indexOf("chips") !== -1)){
                     return true;
@@ -40,6 +33,34 @@
 
             return false;
         };
+
+        $ctrl.remove = (myIndex)=> {
+            $ctrl.onRemove({ index: myIndex})
+        }
+
+        // Implemaentation of lifecycle component
+        $ctrl.$onInit = ()=> {
+            console.log("We are in $onInit()");
+        }
+
+        $ctrl.$onChanges = (changeObj)=> {
+            console.log("Changes: ",changeObj);
+        }
+
+        $ctrl.$postLink = ()=> {
+            $scope.$watch('$ctrl.cookiesList()', (oldValue, newValue)=> {
+            // console.log($element);
+                if(oldValue === true) {
+                    // Show Warning
+                    let warningEle = $element.find('div.error');
+                    warningEle.slideDown(900);
+                }else{
+                    // Hide Waring
+                    let warningEle = $element.find('div.error');
+                    warningEle.slideUp(900);
+                }
+            })
+        }
     }
 
     function ListItemDescription() {
@@ -60,7 +81,10 @@
         // use the factory to create new shopping list service
         let shoppingList = ShoppingListFactory();
 
-        list.items = shoppingList.getItems(); 
+        list.items = shoppingList.getItems();
+        
+        // Here we defined the warning
+        list.warning = "COOKIES DETECTED";
         
         // Decleare the variable title
         let originTitle = 'Shopping List #1';
@@ -78,6 +102,8 @@
 
         // Remove item
         list.removeItem = (itemIndex)=> {
+            console.log('this is ', this);
+            this.lastRemove = "Last item removed was " + this.items[itemIndex].name;
             shoppingList.removeItem(itemIndex);
             list.title = originTitle + " ( " + list.items.length + " items )";
         };

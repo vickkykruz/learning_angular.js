@@ -1,0 +1,11 @@
+<h3>Title: {{ $ctrl.myTitle }}</h3>
+<ol>
+    <li ng-repeat="item in $ctrl.items">
+        <list-item-description></list-item-description>
+        <!-- <button ng-click="list.badRemove($index)">Bad Removed Item</button> -->
+        <button ng-click="$ctrl.remove($index);">Remove Item</button>
+    </li>
+</ol>
+<!-- <div class="error" style="font-weight:700;" ng-if="$ctrl.cookiesList()">WANING!!! WANING!!! COOKIES OR CHIPS DETECTED</div> -->
+<div class="error">OH HORROR! COOKIES DETECTED</div>
+<!-- <div class="error" ng-transclude></div> -->

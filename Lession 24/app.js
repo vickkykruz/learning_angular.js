@@ -14,17 +14,63 @@
             templateUrl: 'list.html',
             scope: {
                 items: '<',
-                title: '@' //The implementation of title
+                title: '@', //The implementation of title
+                // badRemove: '=',
+                onRemove: '&'
             },
             // controller: ShoppingListDirectiveController,
+            // controllerAs: 'list',
              // Another way to do this, is to register it with module.
              controller: 'ShoppingListDirectiveController as list',
-            // controllerAs: 'list',
-            bindToController: true
+            bindToController: true,
+            link: ShoppingListDirectiveLink
         }
 
         return ddo;
     }
+
+    function ShoppingListDirectiveLink(scope, element, attrs, controller) {
+        console.log("Links scope is: ", scope);
+        console.log("Link element is: ", element);
+        console.log("Controller instant is: ", controller);
+
+        scope.$watch('list.cookiesList()', (oldValue, newValue)=> {
+            console.log('oldValue ', oldValue);
+            console.log('newValue ', newValue);
+
+            
+            if(oldValue === true){
+                displayCookiesWarning();
+            }else{
+                removeCookiesWarning();
+            }
+        });
+
+        function displayCookiesWarning() {
+            // Use Angular JqLite to improve the Css Funationality
+            // Documentation => Search For "angularjs jqlite" for all the elements and this provide a lot of JQuery methods..
+            // let warningEle = element.find("div");
+            // console.log(warningEle)
+            // warningEle.css('display', 'block');
+
+            // If Jquery is included before Angular
+            let warningEle = element.find("div.error");
+            warningEle.slideDown(900);
+        }
+    
+        
+        function removeCookiesWarning() {
+            // Use Angular JqLite
+            // let warningEle = element.find("div");
+            // warningEle.css('display', 'none');
+
+            let warningEle = element.find("div.error");
+            warningEle.slideUp(900);
+        }
+
+    }
+
+
 
     function ShoppingListDirectiveController() {
         let list = this;
@@ -78,6 +124,8 @@
 
         // Remove item
         list.removeItem = (itemIndex)=> {
+            console.log('this is ', this);
+            this.lastRemove = "Last item removed was " + this.items[itemIndex].name;
             shoppingList.removeItem(itemIndex);
             list.title = originTitle + " ( " + list.items.length + " items )";
         };

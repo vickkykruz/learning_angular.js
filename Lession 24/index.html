@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="DirectiveApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Directives: Manipulating the DOM with link().</title>
+    <script src="jquery.js"></script>
+    <script src="../angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <h1>Directives: Manipulating the DOM with link()</h1>
+    
+    <div class="display">
+        <!--List 1 (unlimited items)  -->
+        <div id="list1" ng-controller="ShoppingListController1 as list">
+            <input type="text" name="" placeholder="Name Of Item" ng-model="list.itemName" id="">
+            <input type="text" name="" placeholder="Quantity Of Item" ng-model="list.itemQuantity" id="">
+            <button ng-click="list.addItem()">Add Item</button>
+            <span>{{ list.lastRemove }}</span>
+
+            <shopping-list items="list.items" 
+                            title="{{ list.title }}" 
+                            bad-remove="list.removeItem"
+                            on-remove="list.removeItem(index)"></shopping-list>
+
+        </div>
+
+        <!-- List #2 (limited to 3 items) -->
+        <!-- <div id="list2" ng-controller="ShoppingListController2 as list">
+            <h3></h3>
+            <input type="text" name="" placeholder="Name Of Item" ng-model="list.itemName" id="">
+            <input type="text" name="" placeholder="Quantity Of Item" ng-model="list.itemQuantity" id="">
+            <button ng-click="list.addItem()">Add Item</button>
+
+            <shopping-list my-list="list" title="Shopping List #2 (limited to 3)"></shopping-list>
+            <div class="error">Error: {{ list.errorMessage }}</div>
+        </div> -->
+    </div>
+    
+</body>
+</html>

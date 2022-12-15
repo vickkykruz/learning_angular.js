@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ShoppingListEventApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Shopping List With Event</title>
+    <script src="../jquery.js"></script>
+    <script src="../angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <h1>Shopping List With Event</h1>
+    
+    <div class="display">
+        <!--List 1 (unlimited items)  -->
+        <div id="list1" ng-controller="ShoppingListController1 as list">
+            <input type="text" name="" placeholder="Name Of Item" ng-model="list.itemName" id="">
+            <input type="text" name="" placeholder="Quantity Of Item" ng-model="list.itemQuantity" id="">
+            <button ng-click="list.addItem()">Add Item</button>
+            <span>{{ list.lastRemove }}</span>
+
+            <div class="">
+                
+            </div>
+            <shopping-list id="list1"
+                             items="list.items" 
+                            title="{{ list.title }}" 
+                            on-remove="list.removeItem(index)">
+                        </shopping-list>
+        </div>
+    </div>
+    <loading-spainer></loading-spainer>
+</body>
+</html>

@@ -14,7 +14,9 @@
             templateUrl: 'list.html',
             scope: {
                 items: '<',
-                title: '@' //The implementation of title
+                title: '@', //The implementation of title
+                badRemove: '=',
+                onRemove: '&'
             },
             // controller: ShoppingListDirectiveController,
              // Another way to do this, is to register it with module.
@@ -78,6 +80,8 @@
 
         // Remove item
         list.removeItem = (itemIndex)=> {
+            console.log('this is ', this);
+            this.lastRemove = "Last item removed was " + this.items[itemIndex].name;
             shoppingList.removeItem(itemIndex);
             list.title = originTitle + " ( " + list.items.length + " items )";
         };
